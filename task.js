@@ -4,7 +4,9 @@ const { execFileSync } = require('child_process')
 const validate = require('./lib/validate')
 
 function exec(command) {
-	return execFileSync('cmd', [`/C schtasks ${command}`])
+	return execFileSync('cmd', [`/C schtasks ${command}`], {
+		windowsHide: true
+	})
 }
 
 module.exports = {
