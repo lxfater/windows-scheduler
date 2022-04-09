@@ -72,7 +72,7 @@ module.exports = {
 						resolve(result.toString())
 
 					} catch (err) {
-						reject('Task: Create error')
+						reject(`Task: Create error ${err.message}`)
 					}
 				})
 		})
@@ -161,7 +161,7 @@ module.exports = {
 
 					try {
 						const result = exec(` /Run /TN ${taskname}`)
-						resolve(result.toString())
+						resolve(result.toString('utf-8'))
 
 					} catch (err) {
 						resolve('Task: Run error')

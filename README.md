@@ -4,6 +4,10 @@ The context under which the tasks runs is setted to SYSTEM user, otherwise every
 For Windows XP and Windows Server 2003, or previous, there are options not supported.  
 More info [msdn.microsoft.com/Schtasks.exe](https://msdn.microsoft.com/en-us/library/windows/desktop/bb736357(v=vs.85).aspx)
 
+# Improvement
+1. Disable the parameters check of start_date and end_date since the valid date formats depend on the setting of the Short date in Regional and Language Options.
+2. Try the hide the cmd window when trying to execute the commands.
+
 ## Usage
 
 #### Install
