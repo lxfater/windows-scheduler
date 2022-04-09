@@ -1,6 +1,6 @@
 {
   "name": "@lxfater/windows-scheduler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nodejs wrapper for native windows schtasks command.  \r The context under which the tasks runs is setted to SYSTEM user, otherwise every change on a task must be authenticated interactively.  \r For Windows XP and Windows Server 2003, or previous, there are options not supported.  \r More info [msdn.microsoft.com/Schtasks.exe](https://msdn.microsoft.com/en-us/library/windows/desktop/bb736357(v=vs.85).aspx)",
   "main": "task.js",
   "directories": {
