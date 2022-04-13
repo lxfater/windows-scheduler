@@ -59,6 +59,9 @@ module.exports = {
 					if (schedule.asUser) {
 						command = ` /Create /TN ${taskname} /TR ${taskrun}`
 					}
+					if (schedule.highlevel) {
+						command = command.concat(` /RL HIGHEST`)
+					}
 					if (schedule.frequency) command = command.concat(` /SC ${schedule.frequency}`)
 					if (schedule.modifier) command = command.concat(` /MO ${schedule.modifier}`)
 					if (schedule.day) command = command.concat(` /D  ${schedule.day}`)
