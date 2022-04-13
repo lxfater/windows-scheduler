@@ -54,7 +54,9 @@ module.exports = {
 				})
 				.catch(() => {
 					let command = ` /Create /RU SYSTEM /TN ${taskname} /TR ${taskrun}`
-
+					if (schedule.asUser) {
+						command = ` /Create /RU USER /TN ${taskname} /TR ${taskrun}`
+					}
 					if (schedule.frequency) command = command.concat(` /SC ${schedule.frequency}`)
 					if (schedule.modifier) command = command.concat(` /MO ${schedule.modifier}`)
 					if (schedule.day) command = command.concat(` /D  ${schedule.day}`)
