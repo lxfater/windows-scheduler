@@ -7,6 +7,8 @@ More info [msdn.microsoft.com/Schtasks.exe](https://msdn.microsoft.com/en-us/lib
 # Improvement
 1. Disable the parameters check of start_date and end_date since the valid date formats depend on the setting of the Short date in Regional and Language Options.
 2. Try the hide the cmd window when trying to execute the commands.
+3. create a task by loading a xml file
+4. Running the task under currentUser with highest highest privilege.
 
 ## Usage
 
@@ -102,7 +104,9 @@ params {
         endtime :   '<string> format HH:mm',
         every :     '<number> 1 <= every <=599940',
         startdate : '<string> format DD/MM/YYYY',
-        enddate :   '<string> format DD/MM/YYYY'
+        enddate :   '<string> format DD/MM/YYYY',
+        asUser: true,
+        highlevel: true,
     }
 }
 ```
@@ -110,7 +114,20 @@ Older version of windows can't use params 'every' and 'endtime'.
 The param 'modifier' refines the schedule type to allow for finer control over the schedule recurrence.  
 The param 'every' specifies the repetition interval in minutes.  
 The param 'day' is a number for 'MONTHLY' frequency, otherwise is 3-letters coded.
-
+The param 'asUser' is a boolean which enable run the task using current user account.
+The param 'highlevel' is a boolean which enable run the task with highest privilege.
+## load 
+Load a xml file to create a task.
+You can export the xml file from the Windows Task Scheduler 
+```javascript
+function load(taskname, xmlPath) {}
+```
+```javascript
+params {
+    taskname : '<string> (required) min length 3',
+    xmlPath :  'path to the XML file containing the task definition',
+} 
+```
 ## Get
 Show one or more scheduled task.
 ```javascript
