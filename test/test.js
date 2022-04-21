@@ -8,6 +8,46 @@ describe('Task', function () {
 
 	this.timeout(5000)
 
+	describe('load()', function () {
+		it('Load a task with correct params', function (done) {
+			task.load('testXml', './test/test.xml')
+				.then(() => {
+					task.get('testXml')
+					done()
+				})
+				.catch((err) => {
+					console.error(err)
+					done()
+				})
+
+		})
+		it('Throw trying to create with same name ', function (done) {
+			task.load('testXml', './test/test.xml')
+				.then(() => {
+					done()
+				})
+				.catch(async (err) => {
+					console.error(err)
+					await task.delete('testXml')
+					done()
+				})
+
+		})
+		it('load a task with wrong path', function (done) {
+			task.load('test', './test.xl')
+				.then(() => {
+					done()
+				})
+				.catch(async () => {
+
+					done()
+				})
+
+
+		})
+
+	})
+
 	describe('create()', function () {
 
 		it('Create a task with correct params', function (done) {

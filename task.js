@@ -1,5 +1,6 @@
 'use strict'
 
+const { existsSync } = require('fs')
 const { execFileSync } = require('child_process')
 const validate = require('./lib/validate')
 
@@ -10,7 +11,41 @@ function exec(command) {
 }
 
 module.exports = {
+	load: function (taskname, xmlPath) {
+		return new Promise((resolve, reject) => {
 
+			try {
+				validate.load_params(taskname, xmlPath)
+
+			} catch (err) {
+				return reject(err.message)
+			}
+
+			this.get(taskname)
+				.then(() => {
+					return reject('Task: load error - Taskname already exists')
+				})
+				.catch(() => {
+					let command = ` /Create /TN ${taskname} `
+
+					if (!existsSync(xmlPath)) {
+						reject('Xml file does not exist')
+						return 0;
+					}
+					command = command.concat(`/XML ${xmlPath}`)
+
+
+					try {
+						const result = exec(command)
+						resolve(result.toString())
+
+					} catch (err) {
+						reject(`Task:  load error ${err.message}`)
+					}
+				})
+		})
+
+	},
 	get: function (taskname, format, verbose) {
 
 		return new Promise(function (resolve, reject) {
